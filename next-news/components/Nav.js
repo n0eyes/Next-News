@@ -27,6 +27,6 @@ function Nav() {
 
   </div>;
 }
-
+//git 오류 찾기
 export default Nav;
 
