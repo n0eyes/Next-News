@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 import Head from "next/dist/shared/lib/head";
 import "../styles/globals.css";
 

@@ -1,4 +1,4 @@
-import styles from "../styles/Nav.module.css";
+import styles from "../../styles/Nav.module.css";
 import Link from "next/link";
 function Nav() {
   return (
