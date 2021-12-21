@@ -1,18 +1,31 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-export default function Feed() {
+export default function Feed({ feed, index }) {
   return (
     <StyledFeed>
-      <div>1.</div>
+      <div>{index}</div>
       <StyledInfo>
         <StyledMainInfo>
-          <Link href="/">
-            <a>title</a>
+          <Link href={feed.url}>
+            <a>{feed.title}</a>
           </Link>
-          <span>({<a>url</a>})</span>
+          <span>
+            (
+            {
+              <Link href={feed.url}>
+                <a>{feed.domain}</a>
+              </Link>
+            }
+            )
+          </span>
         </StyledMainInfo>
-        <StyledSubInfo>정보정보정보</StyledSubInfo>
+        <StyledSubInfo>
+          <span>{feed.points} points </span>
+          <span>by {feed.user} </span>
+          <span>{feed.time_ago} </span>
+          <span> | {feed.comments_count} comments </span>
+        </StyledSubInfo>
       </StyledInfo>
     </StyledFeed>
   );
@@ -28,6 +41,7 @@ const StyledFeed = styled.div`
     width: 30px;
     color: #828282;
     text-align: center;
+    flex-shrink: 0;
   }
 `;
 
@@ -36,10 +50,8 @@ const StyledInfo = styled.div``;
 const StyledMainInfo = styled.div`
   span {
     margin-left: 3px;
-  }
-  span > a {
-    color: #828282;
     font-size: 0.8rem;
+    color: #828282;
   }
 `;
 const StyledSubInfo = styled.div`
