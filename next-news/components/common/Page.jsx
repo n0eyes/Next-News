@@ -2,8 +2,8 @@ import React from "react";
 import getFeed from "../../pages/api/getFeed";
 import Feed from "./Feed";
 
-export default function Page({ pageIndex, query }) {
-  const { category } = query;
+export default function Page({ pageIndex, category }) {
+  // const { category } = query;
   const { data, error } = getFeed(category ? category[0] : "news", pageIndex);
 
   if (error) return <div>에러</div>;

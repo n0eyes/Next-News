@@ -36,6 +36,7 @@ const StyledFeed = styled.div`
   display: flex;
   width: 100%;
   background-color: rgb(246, 246, 239);
+  padding 0 8px;
 
   & > div:first-child {
     width: 30px;
@@ -55,8 +56,10 @@ const StyledMainInfo = styled.div`
   }
 `;
 const StyledSubInfo = styled.div`
-  height: 30px;
+  min-height: 10px;
   line-height: 30px;
   color: #828282;
-  font-size: 0.8rem;
+  span:nth-child(4) {
+    display: inline-block;
+  }
 `;

@@ -3,10 +3,14 @@ import Layout from "../components/common/Layout";
 import Page from "../components/common/Page";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Head from "next/dist/shared/lib/head";
+import checkLastPage from "../utils/checkLastPage";
+
 export default function Main() {
   const [pageIndex, setPageIndex] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(false);
   const router = useRouter();
-  const query = router.query;
+  const { category } = router.query;
 
   const pagination = () => {
     setPageIndex(pageIndex + 1);
@@ -14,16 +18,33 @@ export default function Main() {
 
   useEffect(() => {
     setPageIndex(1);
-  }, [query, setPageIndex]);
+  }, [category, setPageIndex]);
 
+  useEffect(() => {
+    setIsLastPage(checkLastPage(!category ? "news" : category, pageIndex));
+  }, [category, pageIndex, setIsLastPage]);
   return (
-    <Layout>
-      <Page pageIndex={pageIndex} query={query} />
-      <StyledMoreButton onClick={pagination}>More</StyledMoreButton>
-      <CachingFeed>
-        <Page pageIndex={pageIndex + 1} query={query} />
-      </CachingFeed>
-    </Layout>
+    <>
+      <Head>
+        <title>Hacker News{category ? ` | ${category[0]}` : null}</title>
+      </Head>
+      <Layout>
+        <Page pageIndex={pageIndex} category={category} />
+        <StyledMoreButton
+          onClick={pagination}
+          disabled={isLastPage}
+          isLast={isLastPage}
+        >
+          More
+        </StyledMoreButton>
+        {isLastPage && (
+          <StyledAnnouncement>마지막 페이지 입니다.</StyledAnnouncement>
+        )}
+        <CachingFeed>
+          <Page pageIndex={pageIndex + 1} category={category} />
+        </CachingFeed>
+      </Layout>
+    </>
   );
 }
 const CachingFeed = styled.div`
@@ -38,6 +59,11 @@ const StyledMoreButton = styled.button`
   color: #828282;
   cursor: pointer;
   &:hover {
-    color: black;
+    ${({ isLast }) => (isLast ? null : `color: black`)}
   }
+`;
+const StyledAnnouncement = styled.div`
+  margin-left: 30px;
+  margin-top: 10px;
+  font-weight: bold;
 `;
