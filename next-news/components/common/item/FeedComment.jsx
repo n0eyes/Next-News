@@ -5,9 +5,11 @@ export default function FeedComment({ comment }) {
   return (
     <StyledFeedComment level={comment.level}>
       <StyledSubInfo>
-        <span>{comment.user} </span>
+        <span>
+          <a id={comment.id}>{comment.user} </a>
+        </span>
         <span>{comment.time_ago} </span>
-        {comment.level && <a href="#top"> parent</a>}
+        {comment.level ? <a href="#top">| parent</a> : null}
       </StyledSubInfo>
       <StyledContent
         dangerouslySetInnerHTML={{ __html: comment.content }}
@@ -18,8 +20,18 @@ export default function FeedComment({ comment }) {
 const StyledFeedComment = styled.div`
   width: 100%;
   margin-left: ${({ level }) => `${level * 20}px`};
+  padding-right: ${({ level }) => `${level * 20}px`};
   border-left: 2px solid rgba(130, 130, 130, 0.5);
   padding-left: 10px;
+
+  @media (max-width: 768px) {
+    margin-left: ${({ level }) => `${level * 15}px`};
+    padding-right: ${({ level }) => `${level * 15}px`};
+  }
+  @media (max-width: 360px) {
+    margin-left: ${({ level }) => `${level * 10}px`};
+    padding-right: ${({ level }) => `${level * 10}px`};
+  }
 `;
 const StyledSubInfo = styled.div`
   font-size: 0.8rem;
@@ -34,5 +46,6 @@ const StyledContent = styled.div`
   line-height: 22px;
   p {
     margin: 15px 0;
+    overflow-wrap: break-word;
   }
 `;

@@ -16,7 +16,7 @@ export default function item() {
 
     const alignComments = (comments) => {
       comments.map((comment) => {
-        alignedComments.push(comment);
+        comment.content !== "[deleted]" && alignedComments.push(comment);
         alignComments(comment.comments);
       });
     };
@@ -30,7 +30,7 @@ export default function item() {
     ));
 
   if (error) return <div>에러 발생</div>;
-  if (!data) return <duv>로딩 중</duv>;
+  if (!data) return <div>로딩 중</div>;
   return (
     <Layout>
       <StyledItem>
@@ -44,6 +44,10 @@ export default function item() {
 const StyledItem = styled.div`
   width: 100%;
   padding: 10px 20px 0px 37px;
+
+  @media (max-width: 360px) {
+    padding: 10px 10px 0px 10px;
+  }
 `;
 const StyledCommentsWrapper = styled.div`
   width: 100%;
