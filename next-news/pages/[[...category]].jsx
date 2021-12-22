@@ -23,6 +23,8 @@ export default function Main() {
   useEffect(() => {
     setIsLastPage(checkLastPage(!category ? "news" : category, pageIndex));
   }, [category, pageIndex, setIsLastPage]);
+
+  if (category?.length > 1) return <div>잘못된 접근입니다.</div>;
   return (
     <>
       <Head>

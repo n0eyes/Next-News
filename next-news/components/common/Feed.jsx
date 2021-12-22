@@ -24,7 +24,11 @@ export default function Feed({ feed, index }) {
           <span>{feed.points} points </span>
           <span>by {feed.user} </span>
           <span>{feed.time_ago} </span>
-          <span> | {feed.comments_count} comments </span>
+          {feed.comments_count ? (
+            <Link href={`/item?id=${feed.id}`}>
+              <a> | {feed.comments_count} comments </a>
+            </Link>
+          ) : null}
         </StyledSubInfo>
       </StyledInfo>
     </StyledFeed>
@@ -59,7 +63,7 @@ const StyledSubInfo = styled.div`
   min-height: 10px;
   line-height: 30px;
   color: #828282;
-  span:nth-child(4) {
+  a {
     display: inline-block;
   }
 `;
