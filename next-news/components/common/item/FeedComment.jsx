@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function FeedComment({ comment }) {
+export default function FeedComment({ info }) {
+  const { parent, comment } = info;
+
   return (
     <StyledFeedComment level={comment.level}>
       <StyledSubInfo>
         <span>
           <a id={comment.id}>{comment.user} </a>
         </span>
-        <span>{comment.time_ago} </span>
-        {comment.level ? <a href="#top">| parent</a> : null}
+        <span> {comment.time_ago} </span>
+        {comment.level ? <a href={`#${parent}`}>| parent</a> : null}
       </StyledSubInfo>
       <StyledContent
         dangerouslySetInnerHTML={{ __html: comment.content }}

@@ -14,20 +14,20 @@ export default function item() {
   useEffect(() => {
     const alignedComments = [];
 
-    const alignComments = (comments) => {
-      comments.map((comment) => {
-        comment.content !== "[deleted]" && alignedComments.push(comment);
-        alignComments(comment.comments);
+    const alignComments = (data) => {
+      data.comments.map((comment) => {
+        comment.content.length > 0 &&
+          comment.content !== "[deleted]" &&
+          alignedComments.push({ parent: data.id, comment });
+        alignComments(comment);
       });
     };
-    data && alignComments(data.comments);
+    data && alignComments(data);
     setComments(alignedComments);
   }, [data]);
 
   const renderComments = () =>
-    comments.map((comment) => (
-      <FeedComment key={comment.id} comment={comment} />
-    ));
+    comments.map((info) => <FeedComment key={info.comment.id} info={info} />);
 
   if (error) return <div>에러 발생</div>;
   if (!data) return <div>로딩 중</div>;

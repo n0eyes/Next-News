@@ -18,33 +18,38 @@ export default function Main() {
 
   useEffect(() => {
     setPageIndex(1);
-  }, [category, setPageIndex]);
+  }, [router.query, setPageIndex]);
 
   useEffect(() => {
     setIsLastPage(checkLastPage(!category ? "news" : category, pageIndex));
   }, [category, pageIndex, setIsLastPage]);
 
-  if (category?.length > 1) return <div>잘못된 접근입니다.</div>;
   return (
     <>
       <Head>
         <title>Hacker News{category ? ` | ${category[0]}` : null}</title>
       </Head>
       <Layout>
-        <Page pageIndex={pageIndex} category={category} />
-        <StyledMoreButton
-          onClick={pagination}
-          disabled={isLastPage}
-          isLast={isLastPage}
-        >
-          More
-        </StyledMoreButton>
-        {isLastPage && (
-          <StyledAnnouncement>마지막 페이지 입니다.</StyledAnnouncement>
+        {category?.length > 1 ? (
+          <div>잘못된 접근입니다.</div>
+        ) : (
+          <>
+            <Page pageIndex={pageIndex} category={category} />
+            <StyledMoreButton
+              onClick={pagination}
+              disabled={isLastPage}
+              isLast={isLastPage}
+            >
+              More
+            </StyledMoreButton>
+            {isLastPage && (
+              <StyledAnnouncement>마지막 페이지 입니다.</StyledAnnouncement>
+            )}
+            <CachingFeed>
+              <Page pageIndex={pageIndex + 1} category={category} />
+            </CachingFeed>
+          </>
         )}
-        <CachingFeed>
-          <Page pageIndex={pageIndex + 1} category={category} />
-        </CachingFeed>
       </Layout>
     </>
   );

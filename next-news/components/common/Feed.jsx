@@ -4,21 +4,23 @@ import styled from "styled-components";
 export default function Feed({ feed, index }) {
   return (
     <StyledFeed>
-      <div>{index}</div>
+      <div>{index}.</div>
       <StyledInfo>
         <StyledMainInfo>
           <Link href={feed.url}>
             <a>{feed.title}</a>
           </Link>
-          <span>
-            (
-            {
-              <Link href={feed.url}>
-                <a>{feed.domain}</a>
-              </Link>
-            }
-            )
-          </span>
+          {feed.domain && (
+            <span>
+              (
+              {
+                <Link href={feed.url}>
+                  <a>{feed.domain}</a>
+                </Link>
+              }
+              )
+            </span>
+          )}
         </StyledMainInfo>
         <StyledSubInfo>
           <span>{feed.points} points </span>
@@ -47,6 +49,7 @@ const StyledFeed = styled.div`
     color: #828282;
     text-align: center;
     flex-shrink: 0;
+
   }
 `;
 
