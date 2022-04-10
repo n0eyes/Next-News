@@ -24,33 +24,27 @@ function PageWrapper() {
     setIsLastPage(checkLastPage(!category ? "news" : category, pageIndex));
   }, [pageIndex]);
 
+  if (error) return <StyledState>{error.message}</StyledState>;
+  if (isLoading || !data) return <StyledState>Loading...</StyledState>;
   return (
     <>
-      {error ? (
-        <StyledState>{error.message}</StyledState>
-      ) : isLoading ? (
-        <StyledState>Loading...</StyledState>
-      ) : (
-        <>
-          <Page feeds={data} pageIndex={pageIndex} />
-          {!isFirstPage && (
-            <StyledPaginationButton onClick={() => pagination(-1)}>
-              Before
-            </StyledPaginationButton>
-          )}
-          {!isLastPage && (
-            <StyledPaginationButton onClick={() => pagination(1)}>
-              More
-            </StyledPaginationButton>
-          )}
-          {isLastPage && (
-            <StyledAnnouncement>마지막 페이지 입니다.</StyledAnnouncement>
-          )}
-          <CachingFeed>
-            <Page pageIndex={pageIndex + 1} category={category} />
-          </CachingFeed>
-        </>
+      <Page feeds={data} pageIndex={pageIndex} />
+      {!isFirstPage && (
+        <StyledPaginationButton onClick={() => pagination(-1)}>
+          Before
+        </StyledPaginationButton>
       )}
+      {!isLastPage && (
+        <StyledPaginationButton onClick={() => pagination(1)}>
+          More
+        </StyledPaginationButton>
+      )}
+      {isLastPage && (
+        <StyledAnnouncement>마지막 페이지 입니다.</StyledAnnouncement>
+      )}
+      <CachingFeed>
+        <Page pageIndex={pageIndex + 1} category={category} />
+      </CachingFeed>
     </>
   );
 }
@@ -58,8 +52,8 @@ const CachingFeed = styled.div`
   display: none;
 `;
 const StyledPaginationButton = styled.button`
-  margin-left: 30px;
-  margin-top: 10px;
+  margin-left: 2rem;
+  margin-top: 0.6rem;
   border: none;
   background: transparent;
   font-size: 1.1rem;
@@ -70,8 +64,8 @@ const StyledPaginationButton = styled.button`
   }
 `;
 const StyledAnnouncement = styled.div`
-  margin-left: 30px;
-  margin-top: 10px;
+  margin-left: 2rem;
+  margin-top: 0.6rem;
   font-weight: bold;
 `;
 const StyledState = styled.div`

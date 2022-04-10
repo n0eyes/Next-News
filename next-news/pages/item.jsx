@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Layout from "../components/common/Layout";
 import FeedBody from "../components/common/item/FeedBody";
 import FeedComment from "../components/common/item/FeedComment";
 import styled from "styled-components";
@@ -29,21 +28,13 @@ export default function item() {
   const renderComments = () =>
     comments.map((info) => <FeedComment key={info.comment.id} info={info} />);
 
+  if (error) return <StyledState>{error.message}</StyledState>;
+  if (isLoading) return <StyledState>Loading...</StyledState>;
   return (
-    <Layout>
-      <StyledItem>
-        {error ? (
-          <div>{error.message}</div>
-        ) : isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <FeedBody feed={data} />
-            <StyledCommentsWrapper>{renderComments()}</StyledCommentsWrapper>
-          </>
-        )}
-      </StyledItem>
-    </Layout>
+    <StyledItem>
+      <FeedBody feed={data} />
+      <StyledCommentsWrapper>{renderComments()}</StyledCommentsWrapper>
+    </StyledItem>
   );
 }
 
@@ -60,8 +51,6 @@ const StyledCommentsWrapper = styled.div`
   border-top: 2px solid #ff6600;
   margin-top: 3.1rem;
   padding-top: 1rem;
-  p {
-  }
 `;
 const StyledState = styled.div`
   padding: 0.6rem 1.2rem 0 2.3rem;

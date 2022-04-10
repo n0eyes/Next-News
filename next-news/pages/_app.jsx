@@ -1,6 +1,7 @@
 import Head from "next/dist/shared/lib/head";
 import { useRouter } from "next/router";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Layout from "../components/common/Layout";
 import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }) {
         <title>Hacker News{category ? ` | ${category[0]}` : null}</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </QueryClientProvider>
     </>
   );
