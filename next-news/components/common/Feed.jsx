@@ -42,29 +42,29 @@ const StyledFeed = styled.div`
   display: flex;
   width: 100%;
   background-color: rgb(246, 246, 239);
-  padding 0 8px;
+  padding: 0 0.5rem;
 
   & > div:first-child {
-    width: 30px;
+    width: 2rem;
     color: #828282;
     text-align: center;
     flex-shrink: 0;
-
   }
 `;
 
-const StyledInfo = styled.div``;
+const StyledInfo = styled.div`
+  padding-left: 0.5rem;
+`;
 
 const StyledMainInfo = styled.div`
   span {
-    margin-left: 3px;
     font-size: 0.8rem;
     color: #828282;
   }
 `;
 const StyledSubInfo = styled.div`
-  min-height: 10px;
-  line-height: 30px;
+  min-height: 0.6rem;
+  line-height: 2rem;
   color: #828282;
   a {
     display: inline-block;

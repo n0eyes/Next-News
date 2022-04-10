@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import getFeedComments from "./api/getFeedComments";
 import Layout from "../components/common/Layout";
 import FeedBody from "../components/common/item/FeedBody";
 import FeedComment from "../components/common/item/FeedComment";
 import styled from "styled-components";
+import { useFetchComments } from "../query/feedsQuery";
 export default function item() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error } = getFeedComments(id);
+  const { data, isLoading, error } = useFetchComments(id);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -29,13 +29,19 @@ export default function item() {
   const renderComments = () =>
     comments.map((info) => <FeedComment key={info.comment.id} info={info} />);
 
-  if (error) return <div>에러 발생</div>;
-  if (!data) return <div>로딩 중</div>;
   return (
     <Layout>
       <StyledItem>
-        <FeedBody feed={data} />
-        <StyledCommentsWrapper>{renderComments()}</StyledCommentsWrapper>
+        {error ? (
+          <div>{error.message}</div>
+        ) : isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <FeedBody feed={data} />
+            <StyledCommentsWrapper>{renderComments()}</StyledCommentsWrapper>
+          </>
+        )}
       </StyledItem>
     </Layout>
   );
@@ -43,18 +49,20 @@ export default function item() {
 
 const StyledItem = styled.div`
   width: 100%;
-  padding: 10px 20px 0px 37px;
+  padding: 0.6rem 1.2rem 0 2.3rem;
 
   @media (max-width: 360px) {
-    padding: 10px 10px 0px 10px;
+    padding: 0.6rem 0.6rem 0px 0.6rem;
   }
 `;
 const StyledCommentsWrapper = styled.div`
   width: 100%;
   border-top: 2px solid #ff6600;
-  margin-top: 50px;
-  padding-top: 20px;
+  margin-top: 3.1rem;
+  padding-top: 1rem;
   p {
-    margin: ;
   }
+`;
+const StyledState = styled.div`
+  padding: 0.6rem 1.2rem 0 2.3rem;
 `;

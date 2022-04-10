@@ -31,8 +31,8 @@ const StyledFeedBody = styled.div`
 `;
 
 const StyledSubInfo = styled.div`
-  min-height: 10px;
-  line-height: 30px;
+  min-height: 0.6rem;
+  line-height: 2rem;
   font-size: 0.8rem;
   color: #828282;
   a {
@@ -42,8 +42,8 @@ const StyledSubInfo = styled.div`
 const StyledContent = styled.div`
   width: 100%;
   font-size: 0.9rem;
-  line-height: 22px;
+  line-height: 1.4rem;
   p {
-    margin: 15px 0;
+    margin: 1rem 0;
   }
 `;

@@ -7,8 +7,7 @@ export default Footer;
 
 const StyledFooter = styled.div`
   width: 100%;
-  height: 30px;
+  padding: 1rem 0;
   text-align: center;
-  line-height: 30px;
   background-color: rgb(246, 246, 239);
 `;

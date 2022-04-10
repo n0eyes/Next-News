@@ -5,8 +5,9 @@ const MAXIMUM = {
   show: 2,
   jobs: 1,
 };
-const checkLastPage = (category, currentPage) => {
+
+export const checkFirstPage = (currentPage) => currentPage === 1;
+
+export const checkLastPage = (category, currentPage) => {
   return currentPage >= MAXIMUM[category] ? true : false;
 };
-
-export default checkLastPage;

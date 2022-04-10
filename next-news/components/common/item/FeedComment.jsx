@@ -24,7 +24,7 @@ const StyledFeedComment = styled.div`
   margin-left: ${({ level }) => `${level * 20}px`};
   padding-right: ${({ level }) => `${level * 20}px`};
   border-left: 2px solid rgba(130, 130, 130, 0.5);
-  padding-left: 10px;
+  padding-left: 0.6rem;
 
   @media (max-width: 768px) {
     margin-left: ${({ level }) => `${level * 15}px`};
@@ -45,9 +45,9 @@ const StyledSubInfo = styled.div`
 const StyledContent = styled.div`
   width: 100%;
   font-size: 0.9rem;
-  line-height: 22px;
+  line-height: 1.4rem;
   p {
-    margin: 15px 0;
+    margin: 1rem 0;
     overflow-wrap: break-word;
   }
 `;
