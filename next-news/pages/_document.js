@@ -48,8 +48,18 @@ class MyDocument extends Document {
           <meta name="description" content="news" />
           <meta name="keywords" content="news" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+          <link
+            rel="apple-touch-icon"
+            href="/icons/apple-touch-icon.png"
+          ></link>
           <meta name="theme-color" content="#317EFB" />
+          <meta name="application-name" content="name-test" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="default"
+          />
+          <meta name="apple-mobile-web-app-title" content="apple-name-test" />
         </Head>
         <body>
           <Main />
