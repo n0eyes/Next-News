@@ -1,5 +1,5 @@
 {
-  "background_color": "#004740",
+  "background_color": "#ff6600",
   "description": "Hacker News is a social news website focused on computer science and entrepreneurship.",
   "dir": "ltr",
   "display": "standalone",
@@ -17,10 +17,14 @@
       "purpose": "any maskable"
     },
     {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "splash_pages": null
+  ]
 }
