@@ -43,7 +43,7 @@ function PageWrapper() {
       {!isFirstPage && (
         <StyledPaginationButton
           onClick={() => pagination(-1)}
-          disabled={isPreviousData}
+          disabled={isFirstPage}
         >
           Before
         </StyledPaginationButton>
@@ -51,7 +51,7 @@ function PageWrapper() {
       {!isLastPage && (
         <StyledPaginationButton
           onClick={() => pagination(1)}
-          disabled={isPreviousData}
+          disabled={isLastPage}
         >
           More
         </StyledPaginationButton>
