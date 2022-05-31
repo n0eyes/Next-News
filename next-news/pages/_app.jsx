@@ -16,10 +16,10 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="manifest.json" />
         <title>Hacker News{category ? ` | ${category[0]}` : null}</title>
-        <script type="module">
+        {/* <script type="module">
           import 'https//cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate'; const el =
           document.createElement('pwa-update'); document.body.appendChild(el);
-        </script>
+        </script> */}
       </Head>
       <Script></Script>
       <QueryClientProvider client={queryClient.current}>
