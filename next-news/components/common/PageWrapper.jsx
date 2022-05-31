@@ -4,6 +4,8 @@ import { checkFirstPage, checkLastPage } from "../../utils/checkPage";
 import styled from "styled-components";
 import Page from "./Page";
 import { useFetchFeeds } from "../../query/feedsQuery";
+import { useQuery } from "react-query";
+import { fetchFeeds } from "../../api/fetchFeeds";
 
 function PageWrapper() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -11,7 +13,9 @@ function PageWrapper() {
   const [isLastPage, setIsLastPage] = useState(false);
   const router = useRouter();
   const { category } = router.query;
-  const { data, isLoading, error } = useFetchFeeds(category, pageIndex);
+  const { data, isLoading, error } = useQuery("news", () =>
+    fetchFeeds("news", 1)
+  );
 
   const pagination = (i) => setPageIndex(pageIndex + i);
 
