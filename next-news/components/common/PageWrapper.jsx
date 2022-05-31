@@ -3,9 +3,7 @@ import { useRouter } from "next/router";
 import { checkFirstPage, checkLastPage } from "../../utils/checkPage";
 import styled from "styled-components";
 import Page from "./Page";
-import { useFetchFeeds } from "../../query/feedsQuery";
-import { useQuery } from "react-query";
-import { fetchFeeds } from "../../api/fetchFeeds";
+import useFeedsQuery from "../../query/feedsQuery";
 
 function PageWrapper() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -13,11 +11,14 @@ function PageWrapper() {
   const [isLastPage, setIsLastPage] = useState(false);
   const router = useRouter();
   const { category } = router.query;
-  const { data, isLoading, error } = useQuery("news", () =>
-    fetchFeeds("news", 1)
+  const { useFetchFeeds, usePreFetchFeeds } = useFeedsQuery();
+  const { data, isLoading, error, isPreviousData } = useFetchFeeds(
+    category,
+    pageIndex,
+    { keepPreviousData: true }
   );
 
-  const pagination = (i) => setPageIndex(pageIndex + i);
+  const pagination = (i) => setPageIndex((prev) => prev + i);
 
   useEffect(() => {
     setPageIndex(1);
@@ -25,7 +26,13 @@ function PageWrapper() {
 
   useEffect(() => {
     setIsFirstPage(checkFirstPage(pageIndex));
-    setIsLastPage(checkLastPage(!category ? "news" : category, pageIndex));
+
+    if (checkLastPage(!category ? "news" : category, pageIndex)) {
+      setIsLastPage(true);
+    } else {
+      usePreFetchFeeds(category, pageIndex + 1);
+      setIsLastPage(false);
+    }
   }, [pageIndex]);
 
   if (error) return <StyledState>{error.message}</StyledState>;
@@ -34,12 +41,18 @@ function PageWrapper() {
     <>
       <Page feeds={data} pageIndex={pageIndex} />
       {!isFirstPage && (
-        <StyledPaginationButton onClick={() => pagination(-1)}>
+        <StyledPaginationButton
+          onClick={() => pagination(-1)}
+          disabled={isPreviousData}
+        >
           Before
         </StyledPaginationButton>
       )}
       {!isLastPage && (
-        <StyledPaginationButton onClick={() => pagination(1)}>
+        <StyledPaginationButton
+          onClick={() => pagination(1)}
+          disabled={isPreviousData}
+        >
           More
         </StyledPaginationButton>
       )}

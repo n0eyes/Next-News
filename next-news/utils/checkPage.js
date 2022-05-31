@@ -1,6 +1,6 @@
 const MAXIMUM = {
   news: 10,
-  newest: 12,
+  newest: 10,
   ask: 2,
   show: 2,
   jobs: 1,

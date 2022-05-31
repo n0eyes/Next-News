@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import FeedBody from "../components/common/item/FeedBody";
 import FeedComment from "../components/common/item/FeedComment";
 import styled from "styled-components";
-import { useFetchComments } from "../query/feedsQuery";
+import useFeedsQuery, { useFetchComments } from "../query/feedsQuery";
 export default function item() {
   const router = useRouter();
   const { id } = router.query;
+  const { useFetchComments } = useFeedsQuery();
   const { data, isLoading, error } = useFetchComments(id);
   const [comments, setComments] = useState([]);
 

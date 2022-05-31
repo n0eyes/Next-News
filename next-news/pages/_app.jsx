@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Hacker News{category ? ` | ${category[0]}` : null}</title>
+        <title>Hacker News{category ? ` | ${category}` : null}</title>
       </Head>
       <Script></Script>
       <QueryClientProvider client={queryClient.current}>
