@@ -1,5 +1,5 @@
 {
-  "background_color": "none",
+  "background_color": "#004740",
   "description": "Hacker News is a social news website focused on computer science and entrepreneurship.",
   "dir": "ltr",
   "display": "standalone",
@@ -8,7 +8,7 @@
   "scope": "/",
   "short_name": "HN",
   "start_url": "/",
-  "theme_color": "none",
+  "theme_color": "orange",
   "icons": [
     {
       "src": "/favicon.ico",

@@ -48,6 +48,7 @@ class MyDocument extends Document {
           <meta name="description" content="news" />
           <meta name="keywords" content="news" />
           <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
           <meta name="theme-color" content="#317EFB" />
         </Head>
         <body>
