@@ -5,5 +5,6 @@ module.exports = withPWA({
   reactStrictMode: process.env.NODE_ENV === "development",
   pwa: {
     dest: "public",
+    runtimeCaching,
   },
 });

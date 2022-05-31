@@ -11,11 +11,9 @@
   "theme_color": "none",
   "icons": [
     {
-      "src": "/favicon.ico"
-    },
-    {
       "src": "/favicon.ico",
-      "type": "image/x-icon"
+      "sizes": "16x16"
     }
-  ]
+  ],
+  "splash_pages": null
 }
