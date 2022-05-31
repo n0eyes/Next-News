@@ -8,6 +8,6 @@ const MAXIMUM = {
 
 export const checkFirstPage = (currentPage) => currentPage === 1;
 
-export const checkLastPage = (category, currentPage) => {
+export const checkLastPage = (category = "news", currentPage) => {
   return currentPage >= MAXIMUM[category] ? true : false;
 };

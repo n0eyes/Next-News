@@ -12,12 +12,11 @@ function PageWrapper() {
   const router = useRouter();
   const { category } = router.query;
   const { useFetchFeeds, usePreFetchFeeds } = useFeedsQuery();
-  const { data, isLoading, error, isPreviousData } = useFetchFeeds(
-    category,
-    pageIndex,
-    { keepPreviousData: true }
-  );
+  const { data, isLoading, error } = useFetchFeeds(category, pageIndex, {
+    keepPreviousData: true,
+  });
 
+  console.log("category :>> ", category);
   const pagination = (i) => setPageIndex((prev) => prev + i);
 
   useEffect(() => {
@@ -27,13 +26,13 @@ function PageWrapper() {
   useEffect(() => {
     setIsFirstPage(checkFirstPage(pageIndex));
 
-    if (checkLastPage(!category ? "news" : category, pageIndex)) {
+    if (checkLastPage(category, pageIndex)) {
       setIsLastPage(true);
     } else {
       usePreFetchFeeds(category, pageIndex + 1);
       setIsLastPage(false);
     }
-  }, [pageIndex]);
+  }, [category, pageIndex]);
 
   if (error) return <StyledState>{error.message}</StyledState>;
   if (isLoading || !data) return <StyledState>Loading...</StyledState>;
@@ -41,18 +40,12 @@ function PageWrapper() {
     <>
       <Page feeds={data} pageIndex={pageIndex} />
       {!isFirstPage && (
-        <StyledPaginationButton
-          onClick={() => pagination(-1)}
-          disabled={isFirstPage}
-        >
+        <StyledPaginationButton onClick={() => pagination(-1)}>
           Before
         </StyledPaginationButton>
       )}
       {!isLastPage && (
-        <StyledPaginationButton
-          onClick={() => pagination(1)}
-          disabled={isLastPage}
-        >
+        <StyledPaginationButton onClick={() => pagination(1)}>
           More
         </StyledPaginationButton>
       )}
